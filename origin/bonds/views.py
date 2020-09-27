@@ -1,7 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
 from django.core import serializers
 from .serializers import UserSerializer, BondSerializer
 from .models import Bond
@@ -9,13 +8,6 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny, IsAuthenticated
 import requests
 import json
-
-
-class HelloWorld(APIView):
-    permission_classes = (IsAuthenticated,)  
-
-    def get(self, request):
-        return Response("Hello World!")
 
 class UserCreate(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -36,7 +28,7 @@ class BondsView(APIView):
         d = json.loads(data)
         if len(d) == 0:
             return Response("No bonds for this user.", status=status.HTTP_204_NO_CONTENT)
-            
+
         bonds = [bond["fields"] for bond in d]
         return Response(bonds)
 
