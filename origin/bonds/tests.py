@@ -1,14 +1,12 @@
 from django.test import TestCase
 from .models import Bond
 from django.contrib.auth.models import User
-from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 from rest_framework import status
 
 
 class BondTestCase(TestCase):
     def setUp(self):
-        # Every test needs access to the request factory.
         self.user = User.objects.create_user(username='test', password='test')
 
         self.bond1 = {
