@@ -34,8 +34,7 @@ class BondsView(APIView):
 
     def post(self, request):
         if "lei" not in request.data:
-            s = "There is no lei in your bond."
-            return Response(request.data, status=status.HTTP_400_BAD_REQUEST)
+            return Response("There is no lei in your bond.", status=status.HTTP_400_BAD_REQUEST)
             
         lei = request.data["lei"]
         legal_names = requests.get("https://leilookup.gleif.org/api/v2/leirecords?lei=%s" % lei).json()
