@@ -1,8 +1,11 @@
 # Origin Markets Backend Test
 
 
-###
+### API DOCS
 API documentation can be found here: https://documenter.getpostman.com/view/5708033/TVKHUFbK
+
+### Description
+Code for the API can be found in the bonds folder. views.py contains most of the logic. test.py contains the tests for the api.
 
 ### Spec:
 
