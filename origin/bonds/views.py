@@ -27,7 +27,7 @@ class BondsView(APIView):
         data = serializers.serialize('json', list(queryset), fields=wantedFields)
         d = json.loads(data)
         if len(d) == 0:
-            return Response("No bonds for this user.", status=status.HTTP_204_NO_CONTENT)
+            return Response("No bonds for this user that match the parameter.", status=status.HTTP_204_NO_CONTENT)
 
         bonds = [bond["fields"] for bond in d]
         return Response(bonds)
@@ -51,6 +51,7 @@ class BondsView(APIView):
             return Response("The lei you have entered does not correspond to any legal name. Bond discarded.", status=status.HTTP_204_NO_CONTENT)    
 
         legal_name = legal_names[0]["Entity"]["LegalName"]["$"]
+        legal_name = legal_name.replace(" ", "")
 
         request.data["userid"] = request.user.id
         request.data["legal_name"] = legal_name
